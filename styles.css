@@ -1,0 +1,71 @@
+/* Reset default browser styles */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+}
+
+.background {
+    background: url('background.png') no-repeat center center fixed;
+    background-size: cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;  /* Center vertically */
+    justify-content: center;  /* Center horizontally */
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome-banner {
+    background: rgba(0, 0, 0, 0.7); /* Darker, semi-transparent background for better readability */
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 600px; /* Limit the width */
+    width: 100%; /* Full width within the max-width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+}
+
+.welcome-banner h1 {
+    margin: 0;
+    font-size: 2.5em;
+    line-height: 1.2;
+}
+
+.welcome-banner .brand-name {
+    color: #007bff; /* Blue color */
+    font-weight: bold; /* Make text bold */
+}
+
+.welcome-banner .subtitle {
+    font-size: 1.2em;
+    margin: 10px 0 30px;
+    color: #ddd; /* Light grey color for subtitle */
+}
+
+.button-container {
+    margin-top: 20px;
+}
+
+.cta-button {
+    display: inline-block;
+    padding: 12px 25px;
+    margin: 5px; /* Space between buttons */
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    border: 1px solid transparent; /* Border to improve clickability */
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Slightly enlarge button on hover */
+}
+
+.cta-button:active {
+    background-color: #004494; /* Darker color when button is pressed */
+    transform: scale(1); /* Ensure button returns to normal size */
+}
