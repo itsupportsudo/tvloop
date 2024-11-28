@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to United Health Care</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Inline CSS for simplicity */
+        .video-container, .slide-show-container {
+            display: none; /* Hidden by default */
+            position: fixed; /* Position it in front of the content */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000; /* Ensure it's above other content */
+            background: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .video-container video, .slide-show-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5em;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .slide-show-container {
+            position: relative;
+        }
+
+        .slide-show-container .prev, .slide-show-container .next {
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            cursor: pointer;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .slide-show-container .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .slide-show-container .prev:hover, .slide-show-container .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Styling for the brand name */
+        .brand-name {
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="background">
+        <div class="welcome-banner">
+            <h1>Welcome to <span class="brand-name">IT TV LOOP</span></h1>
+            <p class="subtitle">Your Ultimate Online TV Experience</p>
+            <div class="button-container">
+                <a href="#learn-more" class="cta-button">Learn More</a>
+                <a href="#" class="cta-button" id="play-video-btn-1">Play Video 1</a>
+                <a href="#" class="cta-button" id="play-video-btn-2">Play Video 2</a>
+                <a href="#" class="cta-button" id="play-photo-slide-btn">Play Photo Slide</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video container 1 -->
+    <div class="video-container" id="video-container-1">
+        <button class="close-button" id="close-video-btn-1">&times;</button>
+        <video controls loop>
+            <source src="UHC2.mp4" type="video/mp4"> <!-- Replace with your video file -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Video container 2 -->
+    <div class="video-container" id="video-container-2">
+        <button class="close-button" id="close-video-btn-2">&times;</button>
+        <video controls loop>
+            <source src="UHC3.mp4" type="video/mp4"> <!-- Replace with your second video file -->
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Photo slideshow container -->
+    <div class="slide-show-container" id="slide-show-container">
+        <button class="close-button" id="close-slide-show-btn">&times;</button>
+        <img class="slide" src="photo1.jpg" style="display: block;">
+        <img class="slide" src="photo2.jpg" style="display: none;">
+        <img class="slide" src="photo3.jpg" style="display: none;">
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+    </div>
+
+    <script>
+        // JavaScript to handle showing and hiding the first video container
+        document.getElementById('play-video-btn-1').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            document.getElementById('video-container-1').style.display = 'block';
+        });
+
+        document.getElementById('close-video-btn-1').addEventListener('click', function() {
+            document.getElementById('video-container-1').style.display = 'none';
+        });
+
+        // JavaScript to handle showing and hiding the second video container
+        document.getElementById('play-video-btn-2').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            document.getElementById('video-container-2').style.display = 'block';
+        });
+
+        document.getElementById('close-video-btn-2').addEventListener('click', function() {
+            document.getElementById('video-container-2').style.display = 'none';
+        });
+
+        // JavaScript to handle showing and hiding the slideshow container
+        document.getElementById('play-photo-slide-btn').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default anchor behavior
+            document.getElementById('slide-show-container').style.display = 'block';
+        });
+
+        document.getElementById('close-slide-show-btn').addEventListener('click', function() {
+            document.getElementById('slide-show-container').style.display = 'none';
+        });
+
+        // Slideshow functionality
+        let slideIndex = 0;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            if (n >= slides.length) {slideIndex = 0}
+            if (n < 0) {slideIndex = slides.length - 1}
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex].style.display = "block";
+        }
+    </script>
+</body>
+</html>
