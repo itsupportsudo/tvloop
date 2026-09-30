@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -94,8 +93,8 @@
 
     <!-- Video container 1 -->
     <div class="video-container" id="video-container-1">
-        <button class="close-button" id="close-video-btn-1">&times;</button>
-        <video controls loop>
+        <button class="close-button" id="close-video-btn-1">×</button>
+        <video controls id="video-1">
             <source src="ctbcb.mp4" type="video/mp4"> <!-- Replace with your video file -->
             Your browser does not support the video tag.
         </video>
@@ -103,8 +102,8 @@
 
     <!-- Video container 2 -->
     <div class="video-container" id="video-container-2">
-        <button class="close-button" id="close-video-btn-2">&times;</button>
-        <video controls loop>
+        <button class="close-button" id="close-video-btn-2">×</button>
+        <video controls id="video-2">
             <source src="Aetna_1.mp4" type="video/mp4"> <!-- Replace with your second video file -->
             Your browser does not support the video tag.
         </video>
@@ -112,38 +111,68 @@
 
     <!-- Photo slideshow container -->
     <div class="slide-show-container" id="slide-show-container">
-        <button class="close-button" id="close-slide-show-btn">&times;</button>
+        <button class="close-button" id="close-slide-show-btn">×</button>
         <img class="slide" src="photo1.jpg" style="display: block;">
         <img class="slide" src="photo2.jpg" style="display: none;">
         <img class="slide" src="photo3.jpg" style="display: none;">
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <a class="prev" onclick="plusSlides(-1)">❮</a>
+        <a class="next" onclick="plusSlides(1)">❯</a>
     </div>
 
     <script>
-        // JavaScript to handle showing and hiding the first video container
+        // Helper function to handle opening a video container and playing the video
+        function openVideo(containerId, videoId) {
+            document.getElementById(containerId).style.display = 'block';
+            const vid = document.getElementById(videoId);
+            vid.currentTime = 0;
+            vid.play().catch(error => {
+                console.log("Autoplay prevented or failed: ", error);
+            });
+        }
+
+        // Helper function to handle closing a video container and stopping playback
+        function closeVideo(containerId, videoId) {
+            document.getElementById(containerId).style.display = 'none';
+            const vid = document.getElementById(videoId);
+            vid.pause();
+            vid.currentTime = 0;
+        }
+
+        // Seamless looping setup via JavaScript (bypasses default browser stutter)
+        function setupSeamlessLoop(videoId) {
+            const vid = document.getElementById(videoId);
+            vid.addEventListener('ended', function() {
+                vid.currentTime = 0;
+                vid.play();
+            });
+        }
+
+        setupSeamlessLoop('video-1');
+        setupSeamlessLoop('video-2');
+
+        // Event listeners for Video 1
         document.getElementById('play-video-btn-1').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default anchor behavior
-            document.getElementById('video-container-1').style.display = 'block';
+            event.preventDefault();
+            openVideo('video-container-1', 'video-1');
         });
 
         document.getElementById('close-video-btn-1').addEventListener('click', function() {
-            document.getElementById('video-container-1').style.display = 'none';
+            closeVideo('video-container-1', 'video-1');
         });
 
-        // JavaScript to handle showing and hiding the second video container
+        // Event listeners for Video 2
         document.getElementById('play-video-btn-2').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default anchor behavior
-            document.getElementById('video-container-2').style.display = 'block';
+            event.preventDefault();
+            openVideo('video-container-2', 'video-2');
         });
 
         document.getElementById('close-video-btn-2').addEventListener('click', function() {
-            document.getElementById('video-container-2').style.display = 'none';
+            closeVideo('video-container-2', 'video-2');
         });
 
-        // JavaScript to handle showing and hiding the slideshow container
+        // Event listeners for Slideshow
         document.getElementById('play-photo-slide-btn').addEventListener('click', function(event) {
-            event.preventDefault(); // Prevent default anchor behavior
+            event.preventDefault();
             document.getElementById('slide-show-container').style.display = 'block';
         });
 
@@ -161,8 +190,8 @@
 
         function showSlides(n) {
             let slides = document.getElementsByClassName("slide");
-            if (n >= slides.length) {slideIndex = 0}
-            if (n < 0) {slideIndex = slides.length - 1}
+            if (n >= slides.length) { slideIndex = 0; }
+            if (n < 0) { slideIndex = slides.length - 1; }
             for (let i = 0; i < slides.length; i++) {
                 slides[i].style.display = "none";
             }
@@ -171,6 +200,3 @@
     </script>
 </body>
 </html>
-
-
-
